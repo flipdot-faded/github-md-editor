@@ -1,0 +1,48 @@
+/* ===== Form ===== */
+
+@mixin input_field() {
+    border: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background-color: white;
+    border-radius: 4px;
+
+    &:focus {
+        border: 1px solid rgba(0, 0, 0, .25);
+        box-shadow: 0 0 5px rgba(66, 173, 239, 0.32);
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, .3);
+    }
+
+    &.transparent {
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+textarea {
+    @include input_field();
+
+    width: 100%;
+    resize: none;
+    min-height: 12em;
+    padding: .9em .8em;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datettime-local"],
+input[type="number"],
+input[type="password"],
+input[type="reset"],
+input[type="search"],
+input[type="submit"],
+input[type="text"] {
+    @include input_field();
+
+    width: 100%;
+    padding: .9em .8em;
+}
