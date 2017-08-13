@@ -1,58 +1,93 @@
 import * as React from 'react';
 
 import GitHub from './github';
-import { Container, Grid } from './layout';
+
+import Login from './pages/Login';
+import Editor from './pages/Editor';
 
 
-export interface AppProps { test: string; }
+interface FormData {
+    repo: string;
+    token: string;
+}
 
 interface AppState {
     path: string;
     content: string;
+    loggedIn: boolean,
+    form_data: FormData;
 }
 
-export class App extends React.Component<AppProps, AppState> {
+export class Settings {
+    repo: string;
+    token: string;
+
+    save() {
+        localStorage.setItem("github-md-editor-settings", JSON.stringify(this));
+    }
+
+    static load() : Settings {
+        return JSON.parse(localStorage.getItem("github-md-editor-settings"));
+    }
+}
+
+export class App extends React.Component<{}, AppState> {
 
     github: GitHub;
+    settings: Settings;
 
-    constructor(props: AppProps) {
+    constructor(props: {}) {
         super(props);
-        this.github = new GitHub(/* username */, /* accessToken */);
+
+        let loggedIn = false;
+
+        this.settings = Settings.load();
+
+        if(this.settings == null) {
+            this.settings = new Settings();
+        } else {
+            let repo = this.settings.repo;
+            let token = this.settings.token;
+            if (repo && token) {
+                this.github = new GitHub(repo, token);
+                loggedIn = true;
+            }
+        }
+
         this.state = {
             path: "",
-            content: ""
+            content: "",
+            form_data: {
+                repo: "",
+                token: ""
+            },
+            loggedIn: loggedIn
         };
     }
 
     render() {
+        let page: React.ReactNode;
+
+        if(this.state.loggedIn) {
+            page = <Editor github={this.github} />
+        } else {
+            page = <Login onLogin={this.onLogin} />;
+        }
+
         return (
-            <Container>
-                <h1>{this.props.test}</h1>
-                <button type="button" onClick={this.createPage}>Create Page</button>
-                <div className="text-container">
-                    <input type="text" placeholder="Path" value={this.state.path} onChange={this.updatePath} />
-                    <div className="panel">
-                        <textarea
-                            className="transparent"
-                            value={this.state.content}
-                            placeholder="Inhalt"
-                            onChange={this.updateContent}>
-                        </textarea>
-                    </div>
-                </div>
-            </Container>
+            <div>
+                {page}
+            </div>
         );
     }
 
-    updateContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        this.setState({content: event.target.value});
-    }
+    onLogin = (repo: string, token: string) => {
+        this.github = new GitHub(repo, token);
 
-    updatePath = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({path: event.target.value});
-    }
+        this.settings.repo = repo;
+        this.settings.token = token;
+        this.settings.save();
 
-    createPage = () => {
-        this.github.createPage(this.state.path, this.state.content, "Create test");
+        this.setState({loggedIn: true});
     }
 }

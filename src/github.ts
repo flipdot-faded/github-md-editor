@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64';
 
 export default class GitHub {
 
@@ -18,7 +19,7 @@ export default class GitHub {
         let headers: any = {};
 
         if(this.auth) {
-            headers["Authorization"] = "Basic " + this.accessToken;
+            headers.Authorization = "Basic " + this.accessToken;
         }
 
         return headers;
@@ -30,7 +31,7 @@ export default class GitHub {
             headers: this.defaultHeaders(),
             body: JSON.stringify({
                 message: commitMsg,
-                content: window.btoa(content)
+                content: Base64.encode(content)
             })
         });
     }
@@ -41,7 +42,7 @@ export default class GitHub {
             headers: this.defaultHeaders(),
             body: JSON.stringify({
                 message: commitMsg,
-                content: window.btoa(content),
+                content: Base64.encode(content),
                 sha: sha
             })
         });

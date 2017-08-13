@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "An editor for editing Markdown files in your GitHub repositories.",
   "main": "index.js",
+  "repository": {
+    "url": "https://github.com/flipdot/github-md-editor.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
@@ -15,21 +18,18 @@
   "license": "MIT",
   "dependencies": {
     "@types/classnames": "^2.2.0",
+    "@types/js-base64": "^2.1.5",
     "@types/react": "^16.0.2",
     "@types/react-dom": "^15.5.2",
     "classnames": "^2.2.5",
+    "js-base64": "^2.1.9",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-simplemde-editor": "^3.6.11"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.4",
-    "eslint": "^4.4.1",
     "extract-loader": "^1.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",

@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: [
         './src/index.tsx',
         'file-loader?name=style.css!extract-loader!./src/style/index.scss'
     ],
-    devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist'
     },
@@ -15,26 +15,13 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx', '.json', '.ejs', '.tsx', '.ts', '.scss']
+        extensions: ['*', '.js', '.json', '.ejs', '.tsx', '.ts', '.scss']
     },
     module: {
-        rules: [{
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['react']
-                    }
-                }
-            },
+        rules: [
             {
                 test: /\.(ts|tsx)$/,
                 use: ['awesome-typescript-loader']
-            },
-            {
-                test: /\.css$/,
-                use: ['css-loader']
             },
             {
                 test: /\.scss$/,
@@ -53,6 +40,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[name].js.map'
         })
     ]
 };
