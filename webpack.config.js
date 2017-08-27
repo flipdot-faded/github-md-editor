@@ -3,25 +3,32 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: [
-        'core-js/shim',
-        'whatwg-fetch',
-        './src/index.tsx',
-        'file-loader?name=style.css!extract-loader!./src/style/index.scss'
-    ],
+    entry: {
+        embed: [
+            'core-js/shim',
+            'whatwg-fetch',
+            './src/index.tsx',
+            'file-loader?name=style.css!extract-loader!./src/style/index.scss'
+        ],
+        standalone: [
+            'core-js/shim',
+            'whatwg-fetch',
+            './src/standalone.tsx',
+            'file-loader?name=style.css!extract-loader!./src/style/index.scss'
+        ]
+    },
     devServer: {
         contentBase: './dist'
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
         extensions: ['*', '.js', '.json', '.ejs', '.tsx', '.ts', '.scss']
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(ts|tsx)$/,
                 use: ['awesome-typescript-loader']
             },
@@ -41,7 +48,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.html',
+            chunks: ['standalone']
         }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[name].js.map'

@@ -1,10 +1,16 @@
 import * as React from 'react';
 
 import GitHub from './github';
+import { EditorMode } from './EditorMode';
 
 import Login from './pages/Login';
 import Editor from './pages/Editor';
 
+
+interface AppProps {
+    mode: EditorMode,
+    initPath: string
+}
 
 interface FormData {
     repo: string;
@@ -12,6 +18,7 @@ interface FormData {
 }
 
 interface AppState {
+    mode: EditorMode,
     path: string;
     content: string;
     loggedIn: boolean,
@@ -26,24 +33,24 @@ export class Settings {
         localStorage.setItem("github-md-editor-settings", JSON.stringify(this));
     }
 
-    static load() : Settings {
+    static load(): Settings {
         return JSON.parse(localStorage.getItem("github-md-editor-settings"));
     }
 }
 
-export class App extends React.Component<{}, AppState> {
+export class App extends React.Component<AppProps, AppState> {
 
     github: GitHub;
     settings: Settings;
 
-    constructor(props: {}) {
+    constructor(props: AppProps) {
         super(props);
 
         let loggedIn = false;
 
         this.settings = Settings.load();
 
-        if(this.settings == null) {
+        if (this.settings == null) {
             this.settings = new Settings();
         } else {
             let repo = this.settings.repo;
@@ -55,7 +62,8 @@ export class App extends React.Component<{}, AppState> {
         }
 
         this.state = {
-            path: "",
+            mode: this.props.mode,
+            path: this.props.initPath,
             content: "",
             form_data: {
                 repo: "",
@@ -68,7 +76,7 @@ export class App extends React.Component<{}, AppState> {
     render() {
         let page: React.ReactNode;
 
-        if(this.state.loggedIn) {
+        if (this.state.loggedIn) {
             page = <Editor github={this.github} />;
         } else {
             page = <Login onLogin={this.onLogin} />;
@@ -88,6 +96,6 @@ export class App extends React.Component<{}, AppState> {
         this.settings.token = token;
         this.settings.save();
 
-        this.setState({loggedIn: true});
+        this.setState({ loggedIn: true });
     }
 }

@@ -48,9 +48,9 @@ export default class Login extends React.Component<LoginProps, AppState> {
     }
 
     handleChange = <K extends keyof FormData>(param: K) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        let form_data = {...this.state.form_data};
+        let form_data = { ...this.state.form_data };
         form_data[param] = event.target.value;
-        this.setState({form_data});
+        this.setState({ form_data });
     }
 
     login = () => {
