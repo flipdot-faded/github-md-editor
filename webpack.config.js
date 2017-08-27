@@ -4,6 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: [
+        'core-js/shim',
+        'whatwg-fetch',
         './src/index.tsx',
         'file-loader?name=style.css!extract-loader!./src/style/index.scss'
     ],

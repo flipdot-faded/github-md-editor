@@ -69,7 +69,7 @@ export class App extends React.Component<{}, AppState> {
         let page: React.ReactNode;
 
         if(this.state.loggedIn) {
-            page = <Editor github={this.github} />
+            page = <Editor github={this.github} />;
         } else {
             page = <Login onLogin={this.onLogin} />;
         }

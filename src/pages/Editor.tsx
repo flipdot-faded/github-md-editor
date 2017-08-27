@@ -42,7 +42,7 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
           spellChecker: false,
           indentWithTabs: false,
           status: false
-        }
+        };
     }
 
     updateContent = (value: string) => {
