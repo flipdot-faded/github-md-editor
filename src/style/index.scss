@@ -1,7 +1,7 @@
-@import 'variables';
-
-@import 'scaffolding';
-@import 'layout/index';
-
-@import 'container';
-@import 'form';
+.github-md-editor {
+    @import 'variables';
+    @import 'scaffolding';
+    @import 'layout/index';
+    @import 'container';
+    @import 'form';
+}

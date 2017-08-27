@@ -83,7 +83,7 @@ export class App extends React.Component<AppProps, AppState> {
         }
 
         return (
-            <div>
+            <div className="github-md-editor">
                 {page}
             </div>
         );
