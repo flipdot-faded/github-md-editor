@@ -8,8 +8,8 @@ import Editor from './pages/Editor';
 
 
 interface AppProps {
-    mode: EditorMode,
-    initPath: string
+    mode: EditorMode;
+    initPath: string;
 }
 
 interface FormData {
@@ -19,8 +19,6 @@ interface FormData {
 
 interface AppState {
     mode: EditorMode,
-    path: string;
-    content: string;
     loggedIn: boolean,
     form_data: FormData;
 }
@@ -63,8 +61,6 @@ export class App extends React.Component<AppProps, AppState> {
 
         this.state = {
             mode: this.props.mode,
-            path: this.props.initPath,
-            content: "",
             form_data: {
                 repo: "",
                 token: ""
@@ -77,7 +73,7 @@ export class App extends React.Component<AppProps, AppState> {
         let page: React.ReactNode;
 
         if (this.state.loggedIn) {
-            page = <Editor github={this.github} />;
+            page = <Editor github={this.github} initPath={this.props.initPath} />;
         } else {
             page = <Login onLogin={this.onLogin} />;
         }

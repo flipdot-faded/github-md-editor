@@ -7,6 +7,7 @@ import 'style-loader!css-loader!../../node_modules/react-simplemde-editor/dist/s
 
 export interface EditorProps {
     github: GitHub;
+    initPath: string;
 }
 
 interface EditorState {
@@ -19,7 +20,7 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
     constructor(props: EditorProps) {
         super(props);
         this.state = {
-            path: "",
+            path: this.props.initPath,
             content: ""
         };
     }
@@ -36,21 +37,21 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
         );
     }
 
-    getMarkdownOptions = () : any => {
+    getMarkdownOptions = (): any => {
         return {
-          autofocus: false,
-          spellChecker: false,
-          indentWithTabs: false,
-          status: false
+            autofocus: false,
+            spellChecker: false,
+            indentWithTabs: false,
+            status: false
         };
     }
 
     updateContent = (value: string) => {
-        this.setState({content: value});
+        this.setState({ content: value });
     }
 
     updatePath = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({path: event.target.value});
+        this.setState({ path: event.target.value });
     }
 
     createPage = () => {
