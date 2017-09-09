@@ -14,7 +14,7 @@ module.exports = {
             'core-js/shim',
             'whatwg-fetch',
             './src/standalone.tsx',
-            'file-loader?name=style.css!extract-loader!./src/style/index.scss'
+            'file-loader?name=style.css!extract-loader!./src/style/standalone-page/index.scss'
         ]
     },
     devServer: {

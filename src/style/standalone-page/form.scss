@@ -32,15 +32,15 @@ textarea {
     padding: .9em .8em;
 }
 
-input[type="color"],
-input[type="date"],
-input[type="datettime-local"],
-input[type="number"],
-input[type="password"],
-input[type="reset"],
-input[type="search"],
-input[type="submit"],
-input[type="text"] {
+input[type='color'],
+input[type='date'],
+input[type='datettime-local'],
+input[type='number'],
+input[type='password'],
+input[type='reset'],
+input[type='search'],
+input[type='submit'],
+input[type='text'] {
     @include input_field();
 
     width: 100%;

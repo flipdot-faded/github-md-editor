@@ -1,7 +1,14 @@
 .github-md-editor {
-    @import 'variables';
-    @import 'scaffolding';
-    @import 'layout/index';
-    @import 'container';
-    @import 'form';
+    // Apply border-box fix to the editor, but don't mess with the page it is embedded in.
+    box-sizing: border-box;
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    // Overwrite SimpleMDE's pure-black text color.
+    // http://ianstormtaylor.com/design-tip-never-use-black/
+    .CodeMirror {
+        color: #333;
+    }
 }
