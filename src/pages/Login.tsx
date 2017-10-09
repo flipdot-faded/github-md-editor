@@ -15,7 +15,6 @@ export interface LoginProps {
 }
 
 export default class Login extends React.Component<LoginProps, AppState> {
-
     constructor(props: LoginProps) {
         super(props);
 
@@ -30,19 +29,17 @@ export default class Login extends React.Component<LoginProps, AppState> {
     render() {
         return (
             <div>
-                <div className="text-container">
-                    <input
-                        placeholder="Repository (eg. facebook/react)"
-                        type="text"
-                        value={this.state.form_data.repo}
-                        onChange={this.handleChange("repo")} />
-                    <input
-                        placeholder="Access Token"
-                        type="text"
-                        value={this.state.form_data.token}
-                        onChange={this.handleChange("token")} />
-                    <button onClick={this.login} type="button">Login</button>
-                </div>
+                <input
+                    placeholder="Repository (eg. facebook/react)"
+                    type="text"
+                    value={this.state.form_data.repo}
+                    onChange={this.handleChange("repo")} />
+                <input
+                    placeholder="Access Token"
+                    type="text"
+                    value={this.state.form_data.token}
+                    onChange={this.handleChange("token")} />
+                <button onClick={this.login} type="button">Login</button>
             </div>
         );
     }

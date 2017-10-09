@@ -18,7 +18,6 @@ interface FormData {
 }
 
 interface AppState {
-    mode: EditorMode,
     loggedIn: boolean,
     form_data: FormData;
 }
@@ -60,7 +59,6 @@ export class App extends React.Component<AppProps, AppState> {
         }
 
         this.state = {
-            mode: this.props.mode,
             form_data: {
                 repo: "",
                 token: ""
@@ -73,7 +71,7 @@ export class App extends React.Component<AppProps, AppState> {
         let page: React.ReactNode;
 
         if (this.state.loggedIn) {
-            page = <Editor github={this.github} initPath={this.props.initPath} />;
+            page = <Editor github={this.github} initPath={this.props.initPath} mode={this.props.mode} onCancel={this.onEditCancel} />;
         } else {
             page = <Login onLogin={this.onLogin} />;
         }
@@ -94,4 +92,6 @@ export class App extends React.Component<AppProps, AppState> {
 
         this.setState({ loggedIn: true });
     }
+
+    onEditCancel = () => { }
 }
