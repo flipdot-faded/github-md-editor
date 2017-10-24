@@ -10,15 +10,16 @@ export default class GitHub {
         this.repo = repo;
         this.accessToken = accessToken;
 
-        if(accessToken) {
+        if (accessToken) {
             this.auth = "Basic " + accessToken;
         }
     }
 
-    defaultHeaders() : any {
+    defaultHeaders(): any {
         let headers: any = {};
+        headers['Content-Type'] = 'application/json; charset=utf-8';
 
-        if(this.auth) {
+        if (this.auth) {
             headers.Authorization = "Basic " + this.accessToken;
         }
 
