@@ -31,7 +31,12 @@ export class Settings {
     }
 
     static load(): Settings {
-        return JSON.parse(localStorage.getItem("github-md-editor-settings"));
+        let data = JSON.parse(localStorage.getItem("github-md-editor-settings"));
+
+        if (data !== null) {
+            return Object.assign(new Settings(), data);
+        }
+        return data;
     }
 }
 
@@ -50,12 +55,9 @@ export class App extends React.Component<AppProps, AppState> {
         if (this.settings == null) {
             this.settings = new Settings();
         } else {
-            let repo = this.settings.repo;
-            let token = this.settings.token;
-            if (repo && token) {
-                this.github = new GitHub(repo, token);
-                loggedIn = true;
-            }
+            let { repo, token } = this.settings;
+            this.github = new GitHub(repo, token);
+            loggedIn = true;
         }
 
         this.state = {
