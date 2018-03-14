@@ -38,7 +38,7 @@ export default class GitHub {
     }
 
     updatePage(path: string, content: string, commitMsg: string, sha: string) {
-        return fetch(`https://api.github.com/repos/${this.repo}}/contents/${path}`, {
+        return fetch(`https://api.github.com/repos/${this.repo}/contents/${path}`, {
             method: 'PUT',
             headers: this.defaultHeaders(),
             body: JSON.stringify({
