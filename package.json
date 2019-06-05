@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
-    "css-loader": "^0.28.4",
+    "css-loader": "^2.1.1",
     "extract-loader": "^1.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
